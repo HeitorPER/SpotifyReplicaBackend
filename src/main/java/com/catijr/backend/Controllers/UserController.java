@@ -121,7 +121,7 @@ public class UserController {
         return ResponseEntity.ok(followers);
     }
 
-    @GetMapping("/Following")
+    @GetMapping("/following")
     public ResponseEntity< List<String>> getUserFollowing() {
         List<String> followers =new ArrayList<>(List.of("deadbeat7","xmc0-Infinity"));
 

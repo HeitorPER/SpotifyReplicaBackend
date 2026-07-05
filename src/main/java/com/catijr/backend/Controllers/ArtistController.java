@@ -1,7 +1,9 @@
 package com.catijr.backend.Controllers;
 
 import com.catijr.backend.DTOs.Album.GetAlbumDTO;
+import com.catijr.backend.DTOs.Artist.GetArtistDTO;
 import com.catijr.backend.DTOs.Music.GetMusicDTO;
+import com.catijr.backend.DTOs.Playlist.GetPlaylistDTO;
 import com.catijr.backend.Services.ArtistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,15 @@ import java.util.stream.Collectors;
 public class ArtistController {
 
     private final ArtistService artistService;
+
+    @GetMapping("{artistId}")
+    public ResponseEntity<GetArtistDTO> getArtistById(@PathVariable String artistId) {
+        var artist = artistService.getArtistById(UUID.fromString(artistId));
+
+        GetArtistDTO responseDTO = new GetArtistDTO(artist);
+
+        return ResponseEntity.ok(responseDTO);
+    }
 
     @GetMapping("{artistId}/popularMusics")
     public ResponseEntity<List<GetMusicDTO>> getPopularMusicsByArtistId(@PathVariable String artistId) {
