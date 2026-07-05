@@ -13,6 +13,7 @@ Rotas responsáveis por buscar o histórico e os dados associados ao perfil do u
 | GET | /user/mostPlayedMusics | Retorna as músicas mais ouvidas. |
 | GET | /user/recentAlbums | Retorna os álbuns ouvidos recentemente. |
 | GET | /user/followers | Retorna a lista de todos os seguidores do usuário. |
+| GET | /user/following | Retorna a lista de todos os usuários que o usuário segue. |
 
 ---
 
@@ -35,6 +36,7 @@ Rotas para obter detalhes sobre os artistas e seu engajamento.
 
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
+| GET | /artist/{artistId} | Retorna todos os detalhes de um artista pelo seu Id. |
 | GET | /artist/{artistId}/popularMusics | Retorna a lista (fixa) de músicas mais populares do artista. |
 | GET | /artist/{artistId}/albums | Retorna todos os álbuns associados ao artista específico. |
 
