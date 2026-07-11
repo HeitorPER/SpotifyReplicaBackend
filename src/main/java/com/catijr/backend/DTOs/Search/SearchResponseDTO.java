@@ -1,4 +1,8 @@
 package com.catijr.backend.DTOs.Search;
 
-public class SearchResponseDTO {
+import java.util.List;
+
+public record SearchResponseDTO(List<SearchResultItemDTO> musics, List<SearchResultItemDTO> albums,
+                                List<SearchResultItemDTO> artists, List<SearchResultItemDTO> playlists) {
+
 }
