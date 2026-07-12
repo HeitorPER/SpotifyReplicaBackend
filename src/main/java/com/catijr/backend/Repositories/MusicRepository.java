@@ -13,4 +13,6 @@ public interface MusicRepository extends JpaRepository<Music, UUID> {
     List<Music> findTop5By();
 
     List<Music> findTop5ByOrderByTimesListenDesc();
+
+    List<Music> findByTitleContainingIgnoreCase(String title);
 }
