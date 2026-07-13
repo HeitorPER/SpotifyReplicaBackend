@@ -18,6 +18,9 @@ public class SearchController {
 
     @GetMapping
     public ResponseEntity<SearchResponseDTO> search(@RequestParam("q") String q){
+        if(q == null || q.isBlank()){
+            return ResponseEntity.ok(SearchResponseDTO.empty());
+        }
         return ResponseEntity.ok(searchService.search(q));
     }
 
