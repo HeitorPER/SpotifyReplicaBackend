@@ -1,13 +1,10 @@
 package com.catijr.backend.Services;
 
 
-import com.catijr.backend.DTOs.Playlist.GetPlaylistNoMusicDTO;
-import com.catijr.backend.DTOs.Playlist.PutPlaylistDTO;
+import com.catijr.backend.DTOs.Playlist.*;
 import com.catijr.backend.Entities.Music;
 import com.catijr.backend.Entities.Playlist;
 import com.catijr.backend.Repositories.MusicRepository;
-import com.catijr.backend.DTOs.Playlist.CreatePlaylistDTO;
-import com.catijr.backend.DTOs.Playlist.GetPlaylistDTO;
 import com.catijr.backend.Entities.Music;
 import com.catijr.backend.Entities.Playlist;
 import com.catijr.backend.Mappers.PlaylistMapper;
@@ -18,8 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +51,34 @@ public class PlaylistService {
         var edited = playlistRepository.save(playlist);
 
         return edited;
+    }
+
+    public Playlist editPlaylistOrder(UUID playlistId, PutPlaylistMusicsDTO changesDTO) {
+        var playlist = playlistRepository.findById(playlistId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        List<UUID> musicIds = changesDTO.musicIds();
+        List<Music> currentSongs = playlist.getSongs();
+
+        boolean sameSize = musicIds.size() == currentSongs.size();
+        boolean noDuplicates = new HashSet<>(musicIds).size() == musicIds.size();
+
+        Map<UUID, Music> songsById = currentSongs.stream()
+                .collect(Collectors.toMap(Music::getId, song -> song));
+
+        boolean allBelongToPlaylist = musicIds.stream().allMatch(songsById::containsKey);
+
+        if (!sameSize || !noDuplicates || !allBelongToPlaylist) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        List<Music> reorderedSongs = musicIds.stream()
+                .map(songsById::get)
+                .collect(Collectors.toList());
+
+        playlist.setSongs(reorderedSongs);
+
+        return playlistRepository.save(playlist);
     }
 
     public Playlist addMusicToPlaylist(UUID playlistId, UUID musicId) {

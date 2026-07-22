@@ -18,3 +18,4 @@ public interface PlaylistRepository extends JpaRepository<Playlist, UUID> {
     List<Playlist> findByNameContainingIgnoreCase(String name);
 
 }
+
