@@ -1,14 +1,11 @@
 package com.catijr.backend.Controllers;
 
 
-import com.catijr.backend.DTOs.Music.GetMusicDTO;
 import com.catijr.backend.DTOs.Playlist.*;
 import com.catijr.backend.Services.PlaylistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

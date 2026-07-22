@@ -5,8 +5,6 @@ import com.catijr.backend.DTOs.Playlist.*;
 import com.catijr.backend.Entities.Music;
 import com.catijr.backend.Entities.Playlist;
 import com.catijr.backend.Repositories.MusicRepository;
-import com.catijr.backend.Entities.Music;
-import com.catijr.backend.Entities.Playlist;
 import com.catijr.backend.Mappers.PlaylistMapper;
 import com.catijr.backend.Repositories.PlaylistRepository;
 import lombok.RequiredArgsConstructor;
