@@ -1,0 +1,7 @@
+package com.catijr.backend.DTOs.Playlist;
+
+import java.util.List;
+import java.util.UUID;
+
+public record PutPlaylistMusicsDTO(List<UUID> musicIds) {
+}

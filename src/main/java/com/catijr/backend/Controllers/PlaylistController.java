@@ -1,18 +1,11 @@
 package com.catijr.backend.Controllers;
 
 
-import com.catijr.backend.DTOs.Music.GetMusicDTO;
-import com.catijr.backend.DTOs.Playlist.GetPlaylistDTO;
-import com.catijr.backend.DTOs.Playlist.GetPlaylistNoMusicDTO;
-import com.catijr.backend.DTOs.Playlist.PutPlaylistDTO;
-import com.catijr.backend.DTOs.Playlist.CreatePlaylistDTO;
-import com.catijr.backend.DTOs.Playlist.GetPlaylistDTO;
+import com.catijr.backend.DTOs.Playlist.*;
 import com.catijr.backend.Services.PlaylistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +33,16 @@ public class PlaylistController {
         var edited_playlist = playlistService.editPlaylistAttributes(UUID.fromString(playlistId), changesDTO);
 
         GetPlaylistNoMusicDTO responseDTO = new GetPlaylistNoMusicDTO(edited_playlist);
+
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @PutMapping("{playlistId}/musics")
+    public ResponseEntity<GetPlaylistDTO> ReorderPlaylistMusics(@PathVariable String playlistId,
+                                                                 @RequestBody PutPlaylistMusicsDTO changesDTO){
+        var edited_playlist = playlistService.editPlaylistOrder(UUID.fromString(playlistId), changesDTO);
+
+        GetPlaylistDTO responseDTO = new GetPlaylistDTO(edited_playlist);
 
         return ResponseEntity.ok(responseDTO);
     }
