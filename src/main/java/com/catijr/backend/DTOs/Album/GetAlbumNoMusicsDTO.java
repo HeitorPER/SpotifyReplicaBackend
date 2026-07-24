@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public record GetAlbumNoMusicsDTO(UUID id, String title,
                           String year, UUID artistId,
-                          String artistName,
+                          String artistName, Boolean inLibrary,
                           Instant createdAt, Instant updatedAt) {
 
     public GetAlbumNoMusicsDTO(Album album) {
@@ -17,9 +17,10 @@ public record GetAlbumNoMusicsDTO(UUID id, String title,
                 album.getYear(),
                 album.getOwner().getId(),
                 album.getOwner().getName(),
+                album.getInLibrary(),
                 album.getCreatedAt(),
                 album.getUpdatedAt()
         );
     }
-    
+
 }
