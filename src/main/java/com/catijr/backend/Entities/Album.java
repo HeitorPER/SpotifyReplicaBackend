@@ -33,6 +33,9 @@ public class Album {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    @Column
+    private Boolean inLibrary;
+
     @PrePersist
     public void onPrePersist() {
         this.createdAt = Instant.now();
@@ -42,8 +45,6 @@ public class Album {
     public void onPreUpdate() {
         this.updatedAt = Instant.now();
     }
-
-    //Relação com musica
 
     @ManyToOne
     @JoinColumn(name = "artist")

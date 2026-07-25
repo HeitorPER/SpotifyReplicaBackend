@@ -1,5 +1,6 @@
 package com.catijr.backend.Services;
 
+import com.catijr.backend.DTOs.Album.PatchAlbumDTO;
 import com.catijr.backend.Entities.Album;
 import com.catijr.backend.Entities.Music;
 import com.catijr.backend.Repositories.AlbumRepository;
@@ -29,4 +30,16 @@ public class AlbumService {
 
         return album;
     }
+
+    public Album patchInLibrary(UUID albumId, PatchAlbumDTO patchAlbumDTO){
+        var album = albumRepository.findById(albumId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if(patchAlbumDTO.inLibrary() != null){
+            album.setInLibrary(patchAlbumDTO.inLibrary());
+        }
+
+        return albumRepository.save(album);
+    }
+
 }

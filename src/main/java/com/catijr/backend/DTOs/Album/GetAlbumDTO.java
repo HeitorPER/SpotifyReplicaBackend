@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public record GetAlbumDTO(UUID id, String title,
                           String year, UUID artistId,
-                          String artistName,
+                          String artistName, Boolean InLibrary,
                           List<GetMusicDTO> musics,
                           Instant createdAt, Instant updatedAt) {
 
@@ -21,6 +21,7 @@ public record GetAlbumDTO(UUID id, String title,
                 album.getYear(),
                 album.getOwner().getId(),
                 album.getOwner().getName(),
+                album.getInLibrary(),
                 album.getMusics().stream().map(GetMusicDTO::new).collect(Collectors.toList()),
                 album.getCreatedAt(),
                 album.getUpdatedAt()

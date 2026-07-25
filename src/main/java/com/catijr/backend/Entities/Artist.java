@@ -27,7 +27,8 @@ public class Artist {
     @Column(name = "num_listeners")
     private int listeners;
 
-    //Foto
+    @Column
+    private Boolean isFollowing;
 
     @Column(name = "about")
     private String about;

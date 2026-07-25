@@ -14,4 +14,6 @@ public interface AlbumRepository extends JpaRepository<Album, UUID> {
     List<Album> findTop5By();
 
     List<Album> findByTitleContainingIgnoreCase(String title);
+
+    List<Album> findByInLibraryTrue();
 }
