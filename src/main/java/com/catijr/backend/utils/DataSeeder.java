@@ -48,6 +48,7 @@ public class DataSeeder implements CommandLineRunner {
                     .listeners(200_000 * i)
                     .about("Biografia do Artista " + i + ". Totalmente gerada via automação de teste.")
                     .isFollowing(i % 2 == 0)
+                    .fixado(false)
                     .build();
             artist = artistRepository.save(artist);
 
@@ -61,6 +62,7 @@ public class DataSeeder implements CommandLineRunner {
                         .year("202" + j)
                         .owner(artist)
                         .inLibrary(j % 2 == 0)
+                        .fixado(false)
                         .build();
                 album = albumRepository.save(album);
                 artistAlbums.add(album);
@@ -128,6 +130,7 @@ public class DataSeeder implements CommandLineRunner {
                     .songs(playlistSongs)
                     .musicQtd(targetMusicCount)
                     .duration(totalDuration)
+                    .fixado(false)
                     .build();
 
             playlistRepository.save(playlist);
