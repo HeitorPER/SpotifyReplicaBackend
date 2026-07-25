@@ -28,17 +28,17 @@ public class LibraryService {
     public LibraryResponseDTO getLibrary() {
         List<LibraryItemDTO> playlists = playlistRepository.findAll()
                 .stream()
-                .map(p -> new LibraryItemDTO(p.getId(), p.getName()))
+                .map(LibraryItemDTO::new)
                 .toList();
 
-        List<LibraryItemDTO> artists = artistRepository.findByIsFollowingTrue()
+        List<LibraryItemDTO> artists = artistRepository.findByIsFollowingTrueOrFixadoTrue()
                 .stream()
-                .map(a -> new LibraryItemDTO(a.getId(), a.getName()))
+                .map(LibraryItemDTO::new)
                 .toList();
 
-        List<LibraryItemDTO> albums = albumRepository.findByInLibraryTrue()
+        List<LibraryItemDTO> albums = albumRepository.findByInLibraryTrueOrFixadoTrue()
                 .stream()
-                .map(a -> new LibraryItemDTO(a.getId(), a.getTitle()))
+                .map(LibraryItemDTO::new)
                 .toList();
 
         return new LibraryResponseDTO(playlists, artists, albums);
