@@ -18,4 +18,6 @@ public interface ArtistRepository extends JpaRepository<Artist, UUID> {
     List<Artist> findByNameContainingIgnoreCase(String name);
 
     List<Artist> findByIsFollowingTrue();
+
+    long countByFixadoTrue();
 }
