@@ -15,5 +15,7 @@ public interface AlbumRepository extends JpaRepository<Album, UUID> {
 
     List<Album> findByTitleContainingIgnoreCase(String title);
 
-    List<Album> findByInLibraryTrue();
+    List<Album> findByInLibraryTrueOrFixadoTrue();
+
+    long countByFixadoTrue();
 }

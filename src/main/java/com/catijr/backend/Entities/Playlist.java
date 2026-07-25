@@ -33,6 +33,9 @@ public class Playlist {
     @Column(name = "duration")
     private int duration;
 
+    @Column
+    private Boolean fixado;
+
     @Column(name = "created_at")
     private Instant createdAt;
 
