@@ -2,15 +2,13 @@ package com.catijr.backend.Controllers;
 
 import com.catijr.backend.DTOs.Album.GetAlbumDTO;
 import com.catijr.backend.DTOs.Artist.GetArtistDTO;
+import com.catijr.backend.DTOs.Artist.PatchArtistDTO;
 import com.catijr.backend.DTOs.Music.GetMusicDTO;
 import com.catijr.backend.DTOs.Playlist.GetPlaylistDTO;
 import com.catijr.backend.Services.ArtistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -46,6 +44,16 @@ public class ArtistController {
         var albums = artistService.getAlbumsByArtistId(UUID.fromString(artistId));
 
         List<GetAlbumDTO> responseDTO = albums.stream().map(album -> new GetAlbumDTO(album)).collect(Collectors.toList());
+
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @PatchMapping("/{artistId}/IsFollowing")
+    public ResponseEntity<GetArtistDTO> patchIsFollowing(@PathVariable String artistId,
+                                                         @RequestBody PatchArtistDTO patchArtistDTO){
+        var artist = artistService.patchIsFollowing(UUID.fromString(artistId), patchArtistDTO);
+
+        GetArtistDTO responseDTO = new GetArtistDTO(artist);
 
         return ResponseEntity.ok(responseDTO);
     }

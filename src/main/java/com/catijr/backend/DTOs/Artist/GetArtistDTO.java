@@ -5,7 +5,7 @@ import com.catijr.backend.Entities.Artist;
 import java.time.Instant;
 import java.util.UUID;
 
-public record GetArtistDTO(UUID id, String name, int listeners, String about,
+public record GetArtistDTO(UUID id, String name, int listeners, String about, Boolean IsFollowing,
     Instant createdAt, Instant updatedAt
 ){
 
@@ -15,6 +15,7 @@ public record GetArtistDTO(UUID id, String name, int listeners, String about,
             artist.getName(),
             artist.getListeners(),
             artist.getAbout(),
+            artist.getIsFollowing(),
             artist.getCreatedAt(),
             artist.getUpdatedAt()
 
