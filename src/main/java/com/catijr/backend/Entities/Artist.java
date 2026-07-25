@@ -30,6 +30,9 @@ public class Artist {
     @Column
     private Boolean isFollowing;
 
+    @Column
+    private Boolean fixado;
+
     @Column(name = "about")
     private String about;
 

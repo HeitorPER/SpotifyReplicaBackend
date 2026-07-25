@@ -36,6 +36,9 @@ public class Album {
     @Column
     private Boolean inLibrary;
 
+    @Column
+    private Boolean fixado;
+
     @PrePersist
     public void onPrePersist() {
         this.createdAt = Instant.now();
