@@ -6,9 +6,10 @@ import com.catijr.backend.Entities.Playlist;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 public record GetPlaylistDTO(UUID id, String name, String description, int musicQtd,
-                             int duration, List<GetMusicDTO> musics,
+                             int duration, List<PlaylistMusicDTO> musics,
                              Instant createdAt, Instant updatedAt ) {
 
     public GetPlaylistDTO(Playlist playlist) {
@@ -18,7 +19,9 @@ public record GetPlaylistDTO(UUID id, String name, String description, int music
                 playlist.getDescription(),
                 playlist.getMusicQtd(),
                 playlist.getDuration(),
-                playlist.getSongs().stream().map(song -> new GetMusicDTO(song)).toList(),
+                IntStream.range(0, playlist.getSongs().size())
+                        .mapToObj(i -> new PlaylistMusicDTO(i, new GetMusicDTO(playlist.getSongs().get(i))))
+                        .toList(),
                 playlist.getCreatedAt(),
                 playlist.getUpdatedAt()
         );

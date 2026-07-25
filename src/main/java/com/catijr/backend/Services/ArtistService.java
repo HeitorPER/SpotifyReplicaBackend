@@ -1,6 +1,8 @@
 package com.catijr.backend.Services;
 
 
+import com.catijr.backend.DTOs.Album.PatchAlbumDTO;
+import com.catijr.backend.DTOs.Artist.PatchArtistDTO;
 import com.catijr.backend.Entities.Album;
 import com.catijr.backend.Entities.Artist;
 import com.catijr.backend.Entities.Music;
@@ -42,5 +44,16 @@ public class ArtistService {
         var artist = artistRepository.findById(artistId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         return artist.albums;
+    }
+
+    public Artist patchIsFollowing(UUID artistId, PatchArtistDTO patchArtistDTO){
+        var artist = artistRepository.findById(artistId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if(patchArtistDTO.isFollowing() != null){
+            artist.setIsFollowing(patchArtistDTO.isFollowing());
+        }
+
+        return artistRepository.save(artist);
     }
 }
